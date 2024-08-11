@@ -3,6 +3,7 @@
 :author: Bichler Bastian 
 :toc-title: Inhalt
 :sectnums: section
+:docinfo: shared
 = AsciDoc Syntax
 
 ==  Starten mit Asciidoc
@@ -26,11 +27,127 @@ image::img/Extensions.png[]
 ==  Erstellen der Asciidoc Datei
 Erstelle eine Datei mit der Endung .adoc
 
-== Syntax
+== Syntax == 
 Die Syntax ist sehr einfach und leicht zu verstehen.
 === Formatierung
 
 image::img/Format.png[]
+
+=== Leerzeile 
+Um eine Leerzeile zu erstellen benutze einfach 2x Enter um einen Neuen Block zu erstellen 
+oder mit `pass` kann eine neue Zeile erstellt werden. 
+
+[source, adoc]
+----
+Ich bin Bastian  pass:[</br>]
+Und ich mache eine weiterbildung; 
+----
+
+Ich bin Bastian pass:[</br>]
+Und ich mache eine weiterbildung; 
+
+=== Pass Verwenden 
+
+Mit `pass` können wir Text so verwenden ohne das sie Formatiert werden
+[source, ascii] 
+----
+pass:[*Dies ist ein Text*]
+----
+pass:[*Dies ist ein Text*]
+
+Oder mit `pass` können wir auch HTML verwenden
+
+[source, ascii]
+----
+pass:[<span style="color:red;">Dies ist ein roter Text</span>]
+----
+pass:[<span style="color:red;">Dies ist ein roter Text</span>]
+
+== Farben 
+
+Um Farben zu verwenden können wir das hier verwenden
+
+[source, ascii]
+----
+[red]##Dies ist ein roter Text##
+[yellow]##Gelb##
+----
+
+[red]##Dies ist ein roter Text##
+[yellow]##Gelb##
+
+
+==== Farben in Worten 
+
+|===
+|Farbe | Beispiel 
+| Schwarz | [black]##Schwarz##
+| Weiß | [white]##Weiß##
+| Silber | [silver]##Silber##
+| Grau | [gray]##Grau##
+| Maroon | [maroon]##Maroon##
+| Rot | [red]##Rot##
+| Lila | [purple]##Lila##
+| Fuchsia | [fuchsia]##Fuchsia##
+| Grün | [green]##Grün##
+| Limette | [lime]##Limette##
+| Olive | [olive]##Olive##
+| Gelb | [yellow]##Gelb##
+| Navy | [navy]##Navy##
+| Blau | [blue]##Blau##
+| Teal | [teal]##Teal##
+| Aqua | [aqua]##Aqua##
+|===
+
+[NOTE]
+====
+[.red]##Rot## [.blue]##Blau##
+
+In diesem Beispiel wird das Wort “Rot” in roter Farbe und das Wort “Blau” in blauer Farbe dargestellt. Beachten Sie, dass die doppelte Raute (##) es Ihnen ermöglicht, mehrere Formatierungen auf denselben Text anzuwenden, ohne dass zusätzliche Leerzeichen hinzugefügt werden. Ohne die doppelte Raute würde AsciiDoc dies als zwei separate Wörter interpretieren: ein rotes “Rot” und ein normales “Rot”. Mit der doppelten Raute wird das gesamte Wort in roter Farbe dargestellt, ohne zusätzliche Leerzeichen.
+====
+
+
+==== Farben in Hex 
+Um Hex Codes zu verwendne müssen wir dies wieder mit der `pass` Funktion machen.
+
+|===
+| Farbe | Hex-Code 
+| Schwarz | #000000  
+| Weiß | #FFFFFF
+| Silber | #C0C0C0
+| Grau | #808080
+| Maroon | #800000
+| Rot | #FF0000
+| Lila | #800080
+| Fuchsia | #FF00FF
+| Grün | #008000
+| Limette | #00FF00
+| Olive | #808000
+| Gelb | #FFFF00
+| Navy | #000080
+| Blau | #0000FF
+| Teal | #008080
+| Aqua | #00FFFF
+|===
+
+
+[source, ascii]
+----
+ pass:[<span style="color:#800080;>Lila</span>]
+----
+
+Beispiel: pass:[<span style="color:#800080;">Lila</span>]
+
+
+==== Linien Farbig machen 
+
+pass:[<span style="border-bottom: 2px solid #800080;">Wort</span>]
+
+[source, ascii]
+----
+pass:[<span style="border-bottom: 2px solid #800080;">Wort</span>]
+----
+
 
 ==  Überschriften 
 Die Überschriften werden mit einem = eingeleitet.
@@ -60,6 +177,46 @@ test::
     der Test 
 
 ==  Tabellen erstellen 
+
+Tabellen in Asciidoc sind flexibel und können mit verschiedenen Optionen angepasst werden. Hier sind einige der Möglichkeiten:
+
+* `cols` definiert die Spaltenbreite und -ausrichtung.
+* `frame` und `grid` steuern die Rahmen und Gitterlinien der Tabelle.
+* `stripes` fügt abwechselnde Hintergrundfarben zu den Zeilen hinzu.
+* `header` und `footer` ermöglichen es, Kopf- und Fußzeilen zu definieren.
+
+
+frame:
+[cols="1,1",options="header"]  
+|===
+| all | Zeichnet einen Rahmen um die gesamte Tabelle.
+| topbot | Zeichnet einen Rahmen um die ober und unterseite der Tabelle.
+| sides | Zeichnet einen Rahmen um die Seiten der Tabelle.
+| none | Zeichnet keinen Rahmen um die Tabelle.
+|===
+
+grid:
+[cols="1,1",options="header"]
+|===
+| all | Zeichnet ein Gitter um die gesamte Tabelle.
+| horiz | Zeichnet ein Gitter nur horizontal.
+| vert | Zeichnet ein Gitter nur vertikal.
+| rows | Zeichnet ein Gitter um jede Zeile.
+| cols | Zeichnet ein Gitter um jede Spalte.
+| none | Zeichnet kein Gitter.
+|===
+
+stripes:
+[cols="1,1",options="header" stripes="odd"]
+|===
+| odd | Fügt eine Hintergrundfarbe zu den ungeraden Zeilen hinzu.
+| even | Fügt eine Hintergrundfarbe zu den geraden Zeilen hinzu.
+| none | Fügt keine Hintergrundfarbe hinzu.
+| hover | Fügt eine Hintergrundfarbe hinzu, wenn der Benutzer mit der Maus über die Zeile fährt. ( Nur in HTML)
+|===
+
+
+
 [source]
 ----
 |===
@@ -74,6 +231,7 @@ test::
 Hier wird mit den "|===" das Ende und der Anfang definiert
 mit "|" wird eine neue Spalte erstellt
 
+ 
 
 ==  Admonitions
 
@@ -183,6 +341,49 @@ The book hit the floor with a *thud*.
 
 He could hear doves *cooing* in the pine trees`' branches.
 ====
+
+== Einklapbare Blöcke == 
+
+
+[source, target]
+----
+[%collapsible]
+====
+*Hier steht Ihre Überschrift*
+
+Hier steht der Inhalt, der aufgeklappt wird.
+====
+----
+
+Um einen Einklappbaren bereich zu erstellen 
+
+[%collapsible]
+====
+*Hier steht Ihre Überschrift*
+
+Hier steht der Inhalt, der aufgeklappt wird.
+====
+
+Um die Überschrift zu ändern kann dies mit Html Code selbst geschehen 
+
+
+[source, target]
+----
+++++
+<details>
+  <summary>Aufklappbar</summary>
+  Hier steht der Inhalt, der aufgeklappt wird.
+</details>
+++++
+----
+
+
+++++
+<details>
+  <summary>Aufklappbar</summary>
+  Hier steht der Inhalt, der aufgeklappt wird.
+</details>
+++++
 
 == Code Block 
 [source, target]
@@ -318,7 +519,52 @@ Um eine Navigation-Leiste zu erstellen brauchen wir das hier
 
 Um Links eine Navigations leiste zu erstellen diese Erekennt alle == und === und Verlinkt diese miteinander 
 
-Standart Gemäs ist dies auf :toc-level: 2 Heißt wir können an der Seite nur bis einen Unterpunkt machen wenn wir dies Erhöhen können wir 5 angeben dann können wir bis zu `=====` 5 machen und diese So unterkatogerisieren. 
+Standart Gemäs ist dies auf `:toclevels: 4` Heißt wir können an der Seite nur bis einen Unterpunkt machen wenn wir dies Erhöhen können wir 5 angeben dann können wir bis zu `=====` 5 machen und diese So unterkatogerisieren. 
+
+== Eigene Style / CSS einbinden 
+Hier mit können wir Klassen schon im Voraus erstellen und diese dann verwenden. 
+Um den Style zu verbessern / zu Beeinflussen 
+
+Schritt 1:
+
+Erstellen der `docinfo.html` Datei in der gleichen Ebene wie die Asciidoc Datei. 
+
+Schritt 2:
+
+Dort dann die Klassen erstellen die wir verwenden wollen. 
+
+[source, html]
+----
+<style>
+.small-text {
+    font-size: 0.8em;
+}
+</style>
+----
+
+Schritt 3:
+
+In der Asciidoc Datei dann die `docinfo.html` einbinden. 
+
+[source, adoc]
+----
+:docinfo: shared
+----
+
+Schritt 4:
+
+pass:[<span class="small-text">Dies ist ein kleiner Text</span>]
+[source, adoc]
+----
+pass:[<span class="small-text">Dies ist ein kleiner Text</span>]
+----
+
+[IMPORTANT]
+====
+
+Um diese nun in der HMTL auch richtig zu sehen müssen  den umwandlungs Befehl  anpassen `asciidoctor --attribute docinfo=shared datei.adoc` 
+====
+
 
 [[Umwandeln]]
 == Umwandeln in HTML oder PDF 
@@ -335,5 +581,4 @@ asciidoctor-pdf beispiel.adoc
 ----
 Gerne hier weiteres Zum Nachlesen zu Befehlen in Asciidoc 
 link:https://phlow.de/magazin/terminal/asciidoctor/[Klick Mich]
-
 

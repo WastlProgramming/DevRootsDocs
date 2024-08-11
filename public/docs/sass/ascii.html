@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Bichler Bastian">
-<title>AsciDoc Syntax</title>
+<title>SASS - Syntactically Awesome Style Sheets / SCSS - Sassy CSS</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -434,1067 +434,570 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    .small-text {
-        font-size: 0.8em;
-    }
-
-    .big-text {
-        font-size: 2.2em;
-    }
-</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>AsciDoc Syntax</h1>
+<h1>SASS - Syntactically Awesome Style Sheets / SCSS - Sassy CSS</h1>
 <div class="details">
 <span id="author" class="author">Bichler Bastian</span><br>
+<span id="email" class="email"><a href="mailto:bichlerbastian@gmail.com">bichlerbastian@gmail.com</a></span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Inhalt</div>
 <ul class="sectlevel1">
-<li><a href="#_starten_mit_asciidoc">1. Starten mit Asciidoc</a></li>
-<li><a href="#_extensions_installieren">2. Extensions Installieren</a></li>
-<li><a href="#_erstellen_der_asciidoc_datei">3. Erstellen der Asciidoc Datei</a></li>
-<li><a href="#_syntax">4. Syntax</a>
+<li><a href="#_was_ist_sass">1. Was ist SASS?</a></li>
+<li><a href="#_installation_von_sass">2. Installation von SASS</a></li>
+<li><a href="#_sass_dateien_erstellen">3. SASS-Dateien erstellen</a></li>
+<li><a href="#_sass_datei_kompilieren">4. SASS-Datei kompilieren</a></li>
+<li><a href="#_kompilierung_mit_der_kommandozeile">5. Kompilierung mit der Kommandozeile</a></li>
+<li><a href="#_beispiel">6. Beispiel</a></li>
+<li><a href="#_unterschied_zwischen_sass_und_scss">7. Unterschied zwischen SASS und SCSS</a></li>
+<li><a href="#_funktionen_von_sass">8. Funktionen von SASS</a>
 <ul class="sectlevel2">
-<li><a href="#_leerzeile">4.1. Leerzeile</a></li>
-<li><a href="#_pass_verwenden">4.2. Pass Verwenden</a></li>
+<li><a href="#_variablen">8.1. Variablen</a></li>
+<li><a href="#_verschachtelung">8.2. Verschachtelung</a></li>
 </ul>
 </li>
-<li><a href="#_farben">5. Farben</a>
-<ul class="sectlevel3">
-<li><a href="#_farben_in_worten">5.1. Farben in Worten</a></li>
-<li><a href="#_farben_in_hex">5.2. Farben in Hex</a></li>
-<li><a href="#_linien_farbig_machen">5.3. Linien Farbig machen</a></li>
+<li><a href="#_zusammenschreibung">9. Zusammenschreibung</a></li>
+<li><a href="#_mixins">10. Mixins</a>
+<ul class="sectlevel2">
+<li><a href="#_erstellen_und_aufruf_eines_mixins">10.1. Erstellen und aufruf eines Mixins</a></li>
+<li><a href="#_übergabe">10.2. Übergabe</a></li>
+<li><a href="#_festenwert_festlegen_bei_nicht_übergabe">10.3. Festenwert festlegen bei nicht übergabe</a></li>
+<li><a href="#_mehrere_werte_übergeben">10.4. Mehrere Werte übergeben</a></li>
 </ul>
 </li>
-<li><a href="#_überschriften">6. Überschriften</a></li>
-<li><a href="#_checkboxen">7. Checkboxen</a></li>
-<li><a href="#_tabellen_erstellen">8. Tabellen erstellen</a></li>
-<li><a href="#_admonitions">9. Admonitions</a></li>
-<li><a href="#_links_und_bilder">10. Links und Bilder</a></li>
-<li><a href="#_listen_erstellen">11. Listen erstellen</a></li>
-<li><a href="#_umrandungen">12. Umrandungen</a></li>
-<li><a href="#_einklapbare_blöcke">13. Einklapbare Blöcke</a></li>
-<li><a href="#_code_block">14. Code Block</a></li>
-<li><a href="#_verse_style">15. Verse Style</a></li>
-<li><a href="#_open_blocks">16. Open Blocks</a></li>
-<li><a href="#_kommentare">17. Kommentare</a></li>
-<li><a href="#_automatische_nummerierung">18. Automatische Nummerierung</a></li>
-<li><a href="#_source_code_highlighter">19. Source Code Highlighter</a></li>
-<li><a href="#_pdf_einbinden">20. PDF einbinden</a></li>
-<li><a href="#_navigation_leiste">21. Navigation-Leiste</a></li>
-<li><a href="#_eigene_style_css_einbinden">22. Eigene Style / CSS einbinden</a></li>
-<li><a href="#Umwandeln">23. Umwandeln in HTML oder PDF</a></li>
+<li><a href="#_vererbung">11. Vererbung</a>
+<ul class="sectlevel2">
+<li><a href="#_vorteil_von_vererbung">11.1. Vorteil von Vererbung</a></li>
+<li><a href="#_die_schreibweise">11.2. Die % Schreibweise</a></li>
+</ul>
+</li>
+<li><a href="#_use">12. @Use</a></li>
+<li><a href="#_abfragen">13. Abfragen</a></li>
+<li><a href="#_schleifen">14. Schleifen</a></li>
+<li><a href="#_funktionen">15. Funktionen</a></li>
+<li><a href="#_sasscolor">16. sass:color</a></li>
+<li><a href="#_fazit">17. Fazit</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_starten_mit_asciidoc">1. Starten mit Asciidoc</h2>
+<h2 id="_was_ist_sass">1. Was ist SASS?</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Als erstes muss Ruby installiert sein das kannst du <a href="https://rubyinstaller.org/">hier</a> machen.
-Wenn Ruby installiert ist führe diesen Befehl in der Console aus.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-batch" data-lang="batch">gem install asciidoctor</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Im anschluss die Ruby Cmd öffnen und 1 und 2 Installieren</p>
+<p>SASS steht für Syntactically Awesome Style Sheets und ist eine Stylesheet-Sprache, die auf CSS aufbaut. SASS ist eine Metasprache, die in CSS kompiliert wird. SASS bietet viele Funktionen, die in <strong>CSS</strong> nicht vorhanden sind, wie <strong>Variablen</strong>, <strong>Verschachtelung</strong>, <strong>Mixins</strong>, <strong>Vererbung</strong> und vieles mehr. Diese Funktionen machen das Schreiben von CSS einfacher und effizienter.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_extensions_installieren">2. Extensions Installieren</h2>
+<h2 id="_installation_von_sass">2. Installation von SASS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Mit dieser Extension kannst du sehen wie die Datei aussehen würde.
-Installiere hierzu die Extensions für VS Code</p>
+<p>SASS kann auf verschiedene Arten installiert werden. Die einfachste Möglichkeit ist die Installation über den Node Package Manager (NPM). Dazu muss Node.js auf dem Rechner installiert sein. Mit dem folgenden Befehl wird SASS installiert:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">npm install -g sass</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Um es nun zu verwenden verwende <strong>STRG + SHIFT + V</strong></p>
+<p>Oder per Webseite
+<a href="https://sass-lang.com/install">SASS Install</a></p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="img/Extensions.png" alt="Extensions">
-</div>
+<div class="paragraph">
+<p>Der nachteil hier ist das man immer auf die Batch davon zugreifen muss dann</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_erstellen_der_asciidoc_datei">3. Erstellen der Asciidoc Datei</h2>
+<h2 id="_sass_dateien_erstellen">3. SASS-Dateien erstellen</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Erstelle eine Datei mit der Endung .adoc</p>
+<p>SASS-Dateien haben die Dateiendung <strong>.scss</strong> oder <strong>.sass</strong>. Die Dateiendung <strong>.scss</strong> steht für Sassy CSS und ist die neueste Version von SASS. Die Dateiendung <strong>.sass</strong> ist die ältere Version von SASS. In diesem Tutorial verwenden wir die Dateiendung <strong>.scss</strong>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_syntax">4. Syntax</h2>
+<h2 id="_sass_datei_kompilieren">4. SASS-Datei kompilieren</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Die Syntax ist sehr einfach und leicht zu verstehen.
-=== Formatierung</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="img/Format.png" alt="Format">
-</div>
-</div>
-<div class="sect2">
-<h3 id="_leerzeile">4.1. Leerzeile</h3>
-<div class="paragraph">
-<p>Um eine Leerzeile zu erstellen benutze einfach 2x Enter um einen Neuen Block zu erstellen
-oder mit <code>pass</code> kann eine neue Zeile erstellt werden.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">Ich bin Bastian  pass:[&lt;/br&gt;]
-Und ich mache eine weiterbildung;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Ich bin Bastian </br>
-Und ich mache eine weiterbildung;</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_pass_verwenden">4.2. Pass Verwenden</h3>
-<div class="paragraph">
-<p>Mit <code>pass</code> können wir Text so verwenden ohne das sie Formatiert werden</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">pass:[*Dies ist ein Text*]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>*Dies ist ein Text*</p>
-</div>
-<div class="paragraph">
-<p>Oder mit <code>pass</code> können wir auch HTML verwenden</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">pass:[&lt;span style="color:red;"&gt;Dies ist ein roter Text&lt;/span&gt;]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><span style="color:red;">Dies ist ein roter Text</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_farben">5. Farben</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Um Farben zu verwenden können wir das hier verwenden</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">[red]##Dies ist ein roter Text##
-[yellow]##Gelb##</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><span class="red">Dies ist ein roter Text</span>
-<span class="yellow">Gelb</span></p>
-</div>
-<div class="sect3">
-<h4 id="_farben_in_worten">5.1. Farben in Worten</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Farbe</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Beispiel</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Schwarz</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="black">Schwarz</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Weiß</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="white">Weiß</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Silber</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="silver">Silber</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="gray">Grau</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maroon</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="maroon">Maroon</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="red">Rot</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lila</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="purple">Lila</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fuchsia</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="fuchsia">Fuchsia</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grün</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="green">Grün</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Limette</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="lime">Limette</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Olive</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="olive">Olive</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gelb</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="yellow">Gelb</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Navy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="navy">Navy</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Blau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="blue">Blau</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Teal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="teal">Teal</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Aqua</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="aqua">Aqua</span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p><span class="red">Rot</span> <span class="blue">Blau</span></p>
-</div>
-<div class="paragraph">
-<p>In diesem Beispiel wird das Wort “Rot” in roter Farbe und das Wort “Blau” in blauer Farbe dargestellt. Beachten Sie, dass die doppelte Raute (##) es Ihnen ermöglicht, mehrere Formatierungen auf denselben Text anzuwenden, ohne dass zusätzliche Leerzeichen hinzugefügt werden. Ohne die doppelte Raute würde AsciiDoc dies als zwei separate Wörter interpretieren: ein rotes “Rot” und ein normales “Rot”. Mit der doppelten Raute wird das gesamte Wort in roter Farbe dargestellt, ohne zusätzliche Leerzeichen.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_farben_in_hex">5.2. Farben in Hex</h4>
-<div class="paragraph">
-<p>Um Hex Codes zu verwendne müssen wir dies wieder mit der <code>pass</code> Funktion machen.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Farbe</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Hex-Code</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Schwarz</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#000000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Weiß</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FFFFFF</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Silber</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#C0C0C0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#808080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maroon</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#800000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FF0000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lila</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#800080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fuchsia</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FF00FF</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grün</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#008000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Limette</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#00FF00</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Olive</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#808000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gelb</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FFFF00</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Navy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#000080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Blau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#0000FF</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Teal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#008080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Aqua</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#00FFFF</p></td>
-</tr>
-</tbody>
-</table>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii"> pass:[&lt;span style="color:#800080;&gt;Lila&lt;/span&gt;]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Beispiel: <span style="color:#800080;">Lila</span></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_linien_farbig_machen">5.3. Linien Farbig machen</h4>
-<div class="paragraph">
-<p><span style="border-bottom: 2px solid #800080;">Wort</span></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">pass:[&lt;span style="border-bottom: 2px solid #800080;"&gt;Wort&lt;/span&gt;]</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_überschriften">6. Überschriften</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Die Überschriften werden mit einem = eingeleitet.
-je mehr = desto kleiner wird die Überschrift</p>
-</div>
-<div class="paragraph">
-<p>Mit 3x "<strong>-</strong>" Macht mein einen Unterschstrich dieser wird aber eh bei 2x= mitgemacht</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_checkboxen">7. Checkboxen</h2>
-<div class="sectionbody">
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-check-square-o"></i> checked</p>
-</li>
-<li>
-<p><i class="fa fa-check-square-o"></i> also checked</p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> not checked</p>
-</li>
-<li>
-<p>normal list item</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Um Checkboxen zu erstellen machst du das hier</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">* [*] checked</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">* [x] also checked</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">* [ ] not checked</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Eine einrückung kannst du mit "::" machen hinter einen wort</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">test</dt>
-<dd>
-<p>der Test</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tabellen_erstellen">8. Tabellen erstellen</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Tabellen in Asciidoc sind flexibel und können mit verschiedenen Optionen angepasst werden. Hier sind einige der Möglichkeiten:</p>
+<p>SASS-Dateien müssen in CSS-Dateien kompiliert werden, damit sie im Browser angezeigt werden können. Dazu gibt es verschiedene Möglichkeiten:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>cols</code> definiert die Spaltenbreite und -ausrichtung.</p>
+<p>Kompilierung mit der Kommandozeile</p>
 </li>
 <li>
-<p><code>frame</code> und <code>grid</code> steuern die Rahmen und Gitterlinien der Tabelle.</p>
+<p>Kompilierung mit einem Task-Runner wie Gulp oder Grunt</p>
 </li>
 <li>
-<p><code>stripes</code> fügt abwechselnde Hintergrundfarben zu den Zeilen hinzu.</p>
-</li>
-<li>
-<p><code>header</code> und <code>footer</code> ermöglichen es, Kopf- und Fußzeilen zu definieren.</p>
+<p>Kompilierung mit einem Code-Editor wie Visual Studio Code</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>frame:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">all</th>
-<th class="tableblock halign-left valign-top">Zeichnet einen Rahmen um die gesamte Tabelle.</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">topbot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet einen Rahmen um die ober und unterseite der Tabelle.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sides</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet einen Rahmen um die Seiten der Tabelle.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet keinen Rahmen um die Tabelle.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>grid:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">all</th>
-<th class="tableblock halign-left valign-top">Zeichnet ein Gitter um die gesamte Tabelle.</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">horiz</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter nur horizontal.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">vert</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter nur vertikal.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">rows</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter um jede Zeile.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cols</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter um jede Spalte.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet kein Gitter.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>stripes:</p>
-</div>
-<table class="tableblock frame-all grid-all stripes-odd stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">odd</th>
-<th class="tableblock halign-left valign-top">Fügt eine Hintergrundfarbe zu den ungeraden Zeilen hinzu.</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">even</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fügt eine Hintergrundfarbe zu den geraden Zeilen hinzu.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fügt keine Hintergrundfarbe hinzu.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">hover</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fügt eine Hintergrundfarbe hinzu, wenn der Benutzer mit der Maus über die Zeile fährt. ( Nur in HTML)</p></td>
-</tr>
-</tbody>
-</table>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>|===
-|Column 1, Header Row |Column 2, Header Row :red
-|Column 1, Row 1, hi
-|Column 2, Row 1, hi
-|Column 1, Row 2, max
-|Column 2, Row 2, max
-|===</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Hier wird mit den "|===" das Ende und der Anfang definiert
-mit "|" wird eine neue Spalte erstellt</p>
+<p>In diesem Tutorial verwenden wir die Kompilierung mit der Kommandozeile.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_admonitions">9. Admonitions</h2>
+<h2 id="_kompilierung_mit_der_kommandozeile">5. Kompilierung mit der Kommandozeile</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Es gibt bestimmte Aussagen, auf die Sie aufmerksam machen möchten, indem Sie sie aus dem Fluss des Inhalts herausnehmen und ihnen eine Priorität zuweisen. Man nennt sie Ermahnungen. Auf dieser Seite erfahren Sie, welche Hinweistypen AsciiDoc bereitstellt, wie Sie Ihrem Dokument Hinweise hinzufügen und wie Sie diese mithilfe von Symbolen oder Emojis verbessern.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Liste von Admonitions</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>NOTE</p>
-</li>
-<li>
-<p>TIP</p>
-</li>
-<li>
-<p>IMPORTANT</p>
-</li>
-<li>
-<p>CAUTION</p>
-</li>
-<li>
-<p>WARNING</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="img/Admonitions.png" alt="Admonitions">
-</div>
-</div>
-<div class="paragraph">
-<p>Um diese Icons nun zu verwenden muss <code>icons</code> eingeschaltet sein sonst steht nur der Text da.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:icosn: font
-
-[NOTE]
-====
-Das ist ein Notiz # oder eine andere aus der Liste
-====
-
-oder
-WARNING: text</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Bei den unteren wird es erst beendet wen eine leerzeile zwischen der Admonitions und den normalen Text</p>
-</div>
-<div class="paragraph">
-<p>Verwendung:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[NOTE]
-====
-Ein Beispiel für eine Notiz.
-====</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Ein Beispiel für eine Notiz.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_links_und_bilder">10. Links und Bilder</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Links und bilder werden mit einem <strong>link:</strong> eingeleitet und Bilder mit einen <strong>image:</strong></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel</dt>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">link:https://www.google.com[Klick mich]
-image:pfad[alternativer Text]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><a href="https://www.google.com">Klick mich</a></p>
-</div>
-<div class="paragraph">
-<p>Natürlich können Lokale dateien Auch Verlinks sein oder Bilder</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_listen_erstellen">11. Listen erstellen</h2>
-<div class="sectionbody">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">um eine Auflistung zu erstellen brauchen wir das </dt>
-<dd>
-<p>und ein * oder .</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">beispiel::
-* hi</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">beispiel</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>hi</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">beispiel::
-. hi
-.. hi
-... hi</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">beispiel</dt>
-<dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>hi</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>hi</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>hi</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_umrandungen">12. Umrandungen</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">====
-The book hit the floor with a *thud*.
-
-He could hear doves *cooing* in the pine trees`' branches.
-====</code></pre>
-</div>
-</div>
-<div class="exampleblock">
-<div class="title">Example 1. Onomatopoeia</div>
-<div class="content">
-<div class="paragraph">
-<p>The book hit the floor with a <strong>thud</strong>.</p>
-</div>
-<div class="paragraph">
-<p>He could hear doves <strong>cooing</strong> in the pine trees&#8217; branches.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_einklapbare_blöcke">13. Einklapbare Blöcke</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">[%collapsible]
-====
-*Hier steht Ihre Überschrift*
-
-Hier steht der Inhalt, der aufgeklappt wird.
-====</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Um einen Einklappbaren bereich zu erstellen</p>
-</div>
-<details>
-<summary class="title">Details</summary>
-<div class="content">
-<div class="paragraph">
-<p><strong>Hier steht Ihre Überschrift</strong></p>
-</div>
-<div class="paragraph">
-<p>Hier steht der Inhalt, der aufgeklappt wird.</p>
-</div>
-</div>
-</details>
-<div class="paragraph">
-<p>Um die Überschrift zu ändern kann dies mit Html Code selbst geschehen</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">++++
-&lt;details&gt;
-  &lt;summary&gt;Aufklappbar&lt;/summary&gt;
-  Hier steht der Inhalt, der aufgeklappt wird.
-&lt;/details&gt;
-++++</code></pre>
-</div>
-</div>
-<details>
-  <summary>Aufklappbar</summary>
-  Hier steht der Inhalt, der aufgeklappt wird.
-</details>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_code_block">14. Code Block</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">[source, target]
-"----"
-
-Code Bla bla
-"----"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Hier im code Natürlich ohne die " "</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_verse_style">15. Verse Style</h2>
-<div class="sectionbody">
-<div class="verseblock">
-<pre class="content">The fog comes
-on little cat feet.</pre>
-<div class="attribution">
-&#8212; Carl Sandburg<br>
-<cite>two lines from the poem Fog</cite>
-</div>
-</div>
-<div class="paragraph">
-<p>Hier sehen wir das die normalen Zeilen geschreiben wreden und unten ein Verse noch eingefügt wird.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[verse,Carl Sandburg, two lines from the poem Fog]
-The fog comes
-on little cat feet.</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_open_blocks">16. Open Blocks</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>mit den <code>word</code> können wir "Öffnungsblöcke" erstellen.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[sidebar]
-.Related information
---
-This is aside text.
-
-It is used to present information related to the main content.
---</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Related information</div>
-<div class="paragraph">
-<p>This is aside text.</p>
-</div>
-<div class="paragraph">
-<p>It is used to present information related to the main content.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_kommentare">17. Kommentare</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Kommentare sind abunzu sehr wichtig.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">* first text
-
-// Commentar das ist ein Test
-
-* second text</code></pre>
-</div>
+<p>Um eine SASS-Datei mit der Kommandozeile zu kompilieren, verwenden wir den Befehl <strong>sass</strong>. Der Befehl <strong>sass</strong> hat verschiedene Optionen, die wir verwenden können. Die wichtigsten Optionen sind:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>first text</p>
+<p><strong>--watch</strong>: Überwacht die SASS-Datei auf Änderungen und kompiliert sie automatisch in eine CSS-Datei.</p>
 </li>
-</ul>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>second text</p>
+<p><strong>--style</strong>: Gibt an, wie der kompilierte CSS-Code formatiert werden soll. Die möglichen Werte sind <strong>nested</strong>, <strong>expanded</strong>, <strong>compact</strong> und <strong>compressed</strong>.
+<strong>nested</strong>: Der Standardwert. Der kompilierte CSS-Code wird verschachtelt.
+<strong>expanded</strong>: Der kompilierte CSS-Code wird erweitert.
+<strong>compact</strong>: Der kompilierte CSS-Code wird kompakt.
+<strong>compressed</strong>: Der kompilierte CSS-Code wird komprimiert.</p>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_beispiel">6. Beispiel</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>oder in einen Code Block</p>
+<p>Erstellen Sie eine neue Datei mit dem Namen <strong>style.scss</strong> und fügen Sie folgenden Code ein:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[comment]
-Das ist ein kommentar</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>oder</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">////
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">$primary-color: #333;
 
-HIer kommen Kommentare
- ////</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_automatische_nummerierung">18. Automatische Nummerierung</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Um eine Automatische Nummerierung zu erstellen können wir <code>:sectnums: section</code> verwenden.</p>
-</div>
-<div class="paragraph">
-<p>Hier wird dann von oben nach unten die Nummerierung erstellt.</p>
-</div>
-<div class="paragraph">
-<p>Andere Übergabeparameter</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_source_code_highlighter">19. Source Code Highlighter</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Es gibt mehrere Highlighter die wir verwenden können.</p>
-</div>
-<div class="paragraph">
-<p><code>:source-highlighter:</code></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>coderay</p>
-</li>
-<li>
-<p>highlight.js</p>
-</li>
-<li>
-<p>pygments</p>
-</li>
-<li>
-<p>rouge</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In meinen Fall benutze ich <code>highlight.js</code> diese muss nur ganz oben in der Datei eingefügt werden.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:source-highlighter: highlight.js</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pdf_einbinden">20. PDF einbinden</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Natürlich können wir hier auch pdfs einbinden mit</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_navigation_leiste">21. Navigation-Leiste</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Um eine Navigation-Leiste zu erstellen brauchen wir das hier</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:toc: left</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Um Links eine Navigations leiste zu erstellen diese Erekennt alle == und === und Verlinkt diese miteinander</p>
-</div>
-<div class="paragraph">
-<p>Standart Gemäs ist dies auf <code>:toclevels: 4</code> Heißt wir können an der Seite nur bis einen Unterpunkt machen wenn wir dies Erhöhen können wir 5 angeben dann können wir bis zu <code>=====</code> 5 machen und diese So unterkatogerisieren.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_eigene_style_css_einbinden">22. Eigene Style / CSS einbinden</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Hier mit können wir Klassen schon im Voraus erstellen und diese dann verwenden.
-Um den Style zu verbessern / zu Beeinflussen</p>
-</div>
-<div class="paragraph">
-<p>Schritt 1:</p>
-</div>
-<div class="paragraph">
-<p>Erstellen der <code>docinfo.html</code> Datei in der gleichen Ebene wie die Asciidoc Datei.</p>
-</div>
-<div class="paragraph">
-<p>Schritt 2:</p>
-</div>
-<div class="paragraph">
-<p>Dort dann die Klassen erstellen die wir verwenden wollen.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;style&gt;
-.small-text {
-    font-size: 0.8em;
+body {
+  font: 100% Helvetica, sans-serif;
+  color: $primary-color;
 }
-&lt;/style&gt;</code></pre>
+
+h1 {
+  color: $primary-color;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+
+  &amp;:hover {
+    text-decoration: underline;
+  }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Schritt 3:</p>
-</div>
-<div class="paragraph">
-<p>In der Asciidoc Datei dann die <code>docinfo.html</code> einbinden.</p>
+<p>Speichern Sie die Datei und wechseln Sie in das Verzeichnis, in dem sich die Datei befindet. Öffnen Sie die Kommandozeile und geben Sie den folgenden Befehl ein:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:docinfo: shared</code></pre>
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">sass style.scss style.css --style compressed</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Schritt 4:</p>
+<p>Der Befehl kompiliert die Datei <strong>style.scss</strong> in die Datei <strong>style.css</strong> und komprimiert den CSS-Code. Öffnen Sie die Datei <strong>style.css</strong> und überprüfen Sie den kompilierten CSS-Code.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_unterschied_zwischen_sass_und_scss">7. Unterschied zwischen SASS und SCSS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SASS hat zwei Syntaxen: SASS und SCSS. Die SASS-Syntax ist die ältere Version von SASS und verwendet Einrückungen, um Blöcke zu definieren. Die SCSS-Syntax ist die neueste Version von SASS und ähnelt CSS. In diesem Tutorial verwenden wir die SCSS-Syntax.</p>
 </div>
 <div class="paragraph">
-<p><span class="small-text">Dies ist ein kleiner Text</span></p>
+<p>Beispiel SASS-Syntax:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">pass:[&lt;span class="small-text"&gt;Dies ist ein kleiner Text&lt;/span&gt;]</code></pre>
+<pre class="highlightjs highlight"><code class="language-sass hljs" data-lang="sass">$primary-color: #333
+
+body
+  font: 100% Helvetica, sans-serif
+  color: $primary-color
+
+h1
+  color: $primary-color</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Beispiel SCSS-Syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scss hljs" data-lang="scss">$primary-color: #333;
+
+body {
+  font: 100% Helvetica, sans-serif;
+  color: $primary-color;
+}
+
+h1 {
+  color: $primary-color;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_funktionen_von_sass">8. Funktionen von SASS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_variablen">8.1. Variablen</h3>
+<div class="paragraph">
+<p>Variablen in SASS beginnen mit einem Dollarzeichen ($). Sie können überall in Ihrem Stylesheet verwendet werden, um Werte wie Farben, Schriftarten, Abstände usw. zu speichern und zu wiederverwenden.</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scss hljs" data-lang="scss">$primary-color: #333;
+
+body {
+  color: $primary-color;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_verschachtelung">8.2. Verschachtelung</h3>
+<div class="paragraph">
+<p>Verschachtelung in SASS ermöglicht es Ihnen, CSS-Regeln zu verschachteln, um den Code übersichtlicher zu gestalten.</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-scss hljs" data-lang="scss">nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_zusammenschreibung">9. Zusammenschreibung</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Man kann Classennamen aufteilen so das man meherere in eine art schreiben kann</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-html hljs" data-lang="html">&lt;p&gt;Ich bin ein &lt;span class="card card--blue"&gt;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">.card {
+  &amp;--blue {
+    background-color: blue;
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Diese SASS-Regel definiert einen Stil für ein Element mit der Klasse .card und eine zusätzliche Modifikator-Klasse --blue. Wenn ein Element beide Klassen hat (z.B. &lt;div class="card card&#8212;&#8203;blue"&gt;&lt;/div&gt;), wird der Hintergrund des Elements blau gefärbt. Die Verwendung von &amp; ermöglicht es, den Modifikator direkt an den Hauptklassennamen anzuhängen, was eine saubere und modulare Struktur für CSS-Klassen bietet.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_mixins">10. Mixins</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mixins in SASS sind wiederverwendbare Code-Snippets, die in Ihrem Stylesheet definiert und wiederverwendet werden können.
+Es ist so eine Art Funktion</p>
+</div>
+<div class="paragraph">
+<p>Diese werden dann mit <code>@include</code> aufgerufen.</p>
+</div>
+<div class="sect2">
+<h3 id="_erstellen_und_aufruf_eines_mixins">10.1. Erstellen und aufruf eines Mixins</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@mixin coolerBackground(){
+  background-color: #333;
+  color: #fff;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_übergabe">10.2. Übergabe</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+.box {
+  @include border-radius(10px);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_festenwert_festlegen_bei_nicht_übergabe">10.3. Festenwert festlegen bei nicht übergabe</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@mixin border-radius($radius: 5px) {
+  border-radius: $radius;
+}
+
+.box {
+  @include border-radius;
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mehrere_werte_übergeben">10.4. Mehrere Werte übergeben</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@mixin box-shadow($x, $y, $blur, $color) {
+  box-shadow: $x $y $blur $color;
+}
+
+.box {
+  @include box-shadow(1px, 1px, 2px, #000);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vererbung">11. Vererbung</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Vererbung in SASS ermöglicht es Ihnen, CSS-Regeln von einer Klasse zu einer anderen zu vererben.</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">    .message {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
+    }
+
+    .success {
+    @extend .message;
+    border-color: green;
+    }
+
+    .error {
+    @extend .message;
+    border-color: red;
+    }</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Hier wird die Klasse <strong>.message</strong> von den Klassen <strong>.success</strong> und <strong>.error</strong> geerbt.
+und alles andere wird auch von message übernommen.</p>
+</div>
+<div class="paragraph">
+<p>Der Unterschied zwischen Mixins und Vererbung ist das Mixins den Code in die Klasse einfügt und Vererbung den Code in die Klasse einfügt und die Klasse erweitert</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  @extend .message;
+  border-color: green;
+}
+
+.error {
+  @extend .message;
+  border-color: red;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wird zu</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-CSS hljs" data-lang="CSS">.message, .success, .error {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}
+
+.error {
+  border-color: red;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mixin würde so aussehen</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@mixin message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  @include message;
+  border-color: green;
+}
+
+.error {
+  @include message;
+  border-color: red;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wird zu</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-CSS hljs" data-lang="CSS">.success {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+  border-color: green;
+}
+
+.error {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+  border-color: red;
+}</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vorteil_von_vererbung">11.1. Vorteil von Vererbung</h3>
+<div class="paragraph">
+<p>Der Vorteil von Vererbung ist das er den Code schöner und Comprimierter Darstellt</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_die_schreibweise">11.2. Die % Schreibweise</h3>
+<div class="paragraph">
+<p>Die % Schreibweise ist eine Art von Vererbung die nicht in den CSS Code übernommen wird</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">%message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  @extend %message;
+  border-color: green;
+}
+
+.error {
+  @extend %message;
+  border-color: red;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wird zu</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-CSS hljs" data-lang="CSS">.success, .error {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success {
+  border-color: green;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>heißt das %message wird nicht in den CSS Code übernommen</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use">12. @Use</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit @use können Sie Funktionen, Mixins und Variablen aus anderen SASS-Dateien importieren. Der @use-Befehl ersetzt den @import-Befehl, der in älteren Versionen von SASS verwendet wurde.</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="paragraph">
+<p>Erstellen Sie eine neue Datei mit dem Namen <strong>_variables.scss</strong> und fügen Sie folgenden Code ein:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">$primary-color: #333;
+$secondary-color: #666;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@use 'variables';
+
+body {
+  color: variables.$primary-color;
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Der Vorteil hier ist das wir nun ganz viele Sass dateien erstellen können und diese dann in einer Datei zusammenführen können</p>
+</div>
+<div class="paragraph">
+<p>Hier gibt es auch den <code>as</code> Befehl mit wir die Datei umbenennen können wenn diese für uns zulang ist.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -1503,42 +1006,150 @@ Um den Style zu verbessern / zu Beeinflussen</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Um diese nun in der HMTL auch richtig zu sehen müssen  den umwandlungs Befehl  anpassen <code>asciidoctor --attribute docinfo=shared datei.adoc</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Der @use-Befehl sollte muss am Anfang der SASS-Datei stehen.</p>
+</li>
+<li>
+<p>Die Dateinamen sollten immer mit einen <code>_</code> beginnen.</p>
+</li>
+</ul>
 </div>
 </td>
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Man kann mit einer index.scss in einen Order alle dateinen zusammenführen und dann diese index.scss kompilieren
+Um dies zu Machen muss in der index.css folgendes stehen
+  [source, SCSS]
+  ----
+      @use '_textcolors';
+      @use '_backgroundcolors';
+  ----</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Nun kann man einfach mit <code>@use styling</code> die Datei importieren und alle anderen Dateien werden auch importiert natürlich muss der ordner styling heißen</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Umwandeln">23. Umwandeln in HTML oder PDF</h2>
+<h2 id="_abfragen">13. Abfragen</h2>
 <div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-code" data-lang="code">asciidoctor input.adoc</code></pre>
-</div>
+<div class="paragraph">
+<p>Mit @if, @else if und @else können Sie Bedingungen in Ihrem Stylesheet definieren und basierend auf diesen Bedingungen unterschiedliche Stile anwenden.</p>
 </div>
 <div class="paragraph">
-<p>Um eine Asciidoctor zu erstellen in Html zu erstellen</p>
+<p>Beispiel:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-code" data-lang="code">asciidoctor-pdf beispiel.adoc</code></pre>
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">$primary-color: #333;
+
+body {
+  @if $primary-color == #333 {
+    color: $primary-color;
+  } @else {
+    color: #000;
+  }
+}</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_schleifen">14. Schleifen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit @for, @each und @while können Sie Schleifen in Ihrem Stylesheet definieren und wiederholte Stile anwenden.</p>
 </div>
 <div class="paragraph">
-<p>Gerne hier weiteres Zum Nachlesen zu Befehlen in Asciidoc
-<a href="https://phlow.de/magazin/terminal/asciidoctor/">Klick Mich</a></p>
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@for $i from 1 through 3 {
+  .item-#{$i} { width: 2em * $i; }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_funktionen">15. Funktionen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit @function können Sie benutzerdefinierte Funktionen in Ihrem Stylesheet definieren und wiederverwenden.</p>
+</div>
+<div class="paragraph">
+<p>Beispiel:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">@function divide($a, $b) {
+  @return $a / $b;
+}
+
+.container {
+  width: divide(1000px, 2);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sasscolor">16. sass:color</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit sass:color können Sie Farben in SASS definieren und manipulieren.</p>
+</div>
+<div class="paragraph">
+<p>Um sass:color zu verwenden, müssen Wir <code>@use 'sass:color'</code> am Anfang der SASS-Datei hinzufügen.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-SCSS hljs" data-lang="SCSS">color.adjust($color,
+  $red: null, $green: null, $blue: null,
+  $hue: null, $saturation: null, $lightness: null,
+  $whiteness: null, $blackness: null,
+  $alpha: null)
+adjust-color(...) //=&gt; color</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fazit">17. Fazit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SASS ist eine leistungsstarke Stylesheet-Sprache, die das Schreiben von CSS effizienter und einfacher macht. Mit Funktionen wie Variablen, Verschachtelung, Mixins, Vererbung, @use, @if</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-18 21:06:06 +0100
+Last updated 2024-07-04 17:20:39 +0200
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
 </body>
 </html>

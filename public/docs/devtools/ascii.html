@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="author" content="Bichler Bastian">
-<title>AsciDoc Syntax</title>
+<title>DevTools Chrome</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -434,1111 +434,490 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    .small-text {
-        font-size: 0.8em;
-    }
-
-    .big-text {
-        font-size: 2.2em;
-    }
-</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>AsciDoc Syntax</h1>
+<h1>DevTools Chrome</h1>
 <div class="details">
 <span id="author" class="author">Bichler Bastian</span><br>
+<span id="email" class="email"><a href="mailto:bichlerbastian@gmail.com">bichlerbastian@gmail.com</a></span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Inhalt</div>
 <ul class="sectlevel1">
-<li><a href="#_starten_mit_asciidoc">1. Starten mit Asciidoc</a></li>
-<li><a href="#_extensions_installieren">2. Extensions Installieren</a></li>
-<li><a href="#_erstellen_der_asciidoc_datei">3. Erstellen der Asciidoc Datei</a></li>
-<li><a href="#_syntax">4. Syntax</a>
+<li><a href="#_öffnen_der_devtools">1. Öffnen der DevTools</a></li>
+<li><a href="#_console">2. Console</a>
 <ul class="sectlevel2">
-<li><a href="#_leerzeile">4.1. Leerzeile</a></li>
-<li><a href="#_pass_verwenden">4.2. Pass Verwenden</a></li>
+<li><a href="#_assert">2.1. Assert</a></li>
+<li><a href="#_ausgabearten">2.2. Ausgabearten</a></li>
+<li><a href="#_count">2.3. Count</a></li>
+<li><a href="#_debug">2.4. Debug</a></li>
+<li><a href="#_dir">2.5. Dir</a></li>
+<li><a href="#_gruppierung">2.6. Gruppierung</a></li>
+<li><a href="#_style_der_console">2.7. Style der Console</a></li>
+<li><a href="#_table">2.8. Table</a></li>
+<li><a href="#_trace">2.9. Trace</a></li>
+<li><a href="#_zeitmessung">2.10. Zeitmessung</a></li>
 </ul>
 </li>
-<li><a href="#_farben">5. Farben</a>
-<ul class="sectlevel3">
-<li><a href="#_farben_in_worten">5.1. Farben in Worten</a></li>
-<li><a href="#_farben_in_hex">5.2. Farben in Hex</a></li>
-<li><a href="#_linien_farbig_machen">5.3. Linien Farbig machen</a></li>
+<li><a href="#_debugging">3. Debugging</a>
+<ul class="sectlevel2">
+<li><a href="#_breakpoints_code">3.1. Breakpoints Code</a></li>
+<li><a href="#_breakpoints_setzen">3.2. Breakpoints setzen</a></li>
 </ul>
 </li>
-<li><a href="#_überschriften">6. Überschriften</a></li>
-<li><a href="#_checkboxen">7. Checkboxen</a></li>
-<li><a href="#_tabellen_erstellen">8. Tabellen erstellen</a></li>
-<li><a href="#_admonitions">9. Admonitions</a></li>
-<li><a href="#_links_und_bilder">10. Links und Bilder</a></li>
-<li><a href="#_listen_erstellen">11. Listen erstellen</a></li>
-<li><a href="#_umrandungen">12. Umrandungen</a></li>
-<li><a href="#_einklapbare_blöcke">13. Einklapbare Blöcke</a></li>
-<li><a href="#_code_block">14. Code Block</a></li>
-<li><a href="#_verse_style">15. Verse Style</a></li>
-<li><a href="#_open_blocks">16. Open Blocks</a></li>
-<li><a href="#_kommentare">17. Kommentare</a></li>
-<li><a href="#_automatische_nummerierung">18. Automatische Nummerierung</a></li>
-<li><a href="#_source_code_highlighter">19. Source Code Highlighter</a></li>
-<li><a href="#_pdf_einbinden">20. PDF einbinden</a></li>
-<li><a href="#_navigation_leiste">21. Navigation-Leiste</a></li>
-<li><a href="#_eigene_style_css_einbinden">22. Eigene Style / CSS einbinden</a></li>
-<li><a href="#Umwandeln">23. Umwandeln in HTML oder PDF</a></li>
+<li><a href="#_run_befehl">4. Run Befehl</a></li>
+<li><a href="#_snippets">5. Snippets</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_starten_mit_asciidoc">1. Starten mit Asciidoc</h2>
+<h2 id="_öffnen_der_devtools">1. Öffnen der DevTools</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Als erstes muss Ruby installiert sein das kannst du <a href="https://rubyinstaller.org/">hier</a> machen.
-Wenn Ruby installiert ist führe diesen Befehl in der Console aus.</p>
+<p>Die DevTools können auf verschiedene Arten geöffnet werden</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Rechtsklick auf eine Webseite und dann auf "Untersuchen" klicken</p>
+</li>
+<li>
+<p>F12 drücken</p>
+</li>
+<li>
+<p>Strg + Shift + I drücken</p>
+</li>
+<li>
+<p>Strg + Shift + J drücken</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_console">2. Console</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_assert">2.1. Assert</h3>
+<div class="paragraph">
+<p>Mit dem Assert Befehl kann ein Ausdruck überprüft werden. Wenn der Ausdruck falsch ist wird eine Fehlermeldung ausgegeben.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>console.assert(1 === 2, '1 ist nicht gleich 2')</code> - Überprüft ob 1 gleich 2 ist</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-batch" data-lang="batch">gem install asciidoctor</code></pre>
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">console.assert(1 === 2, '1 ist nicht gleich 2')</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Im anschluss die Ruby Cmd öffnen und 1 und 2 Installieren</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_extensions_installieren">2. Extensions Installieren</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Mit dieser Extension kannst du sehen wie die Datei aussehen würde.
-Installiere hierzu die Extensions für VS Code</p>
-</div>
-<div class="paragraph">
-<p>Um es nun zu verwenden verwende <strong>STRG + SHIFT + V</strong></p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="img/Extensions.png" alt="Extensions">
+<img src="img/assert.png" alt="assert">
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_erstellen_der_asciidoc_datei">3. Erstellen der Asciidoc Datei</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Erstelle eine Datei mit der Endung .adoc</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_syntax">4. Syntax</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Die Syntax ist sehr einfach und leicht zu verstehen.
-=== Formatierung</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="img/Format.png" alt="Format">
 </div>
 </div>
 <div class="sect2">
-<h3 id="_leerzeile">4.1. Leerzeile</h3>
-<div class="paragraph">
-<p>Um eine Leerzeile zu erstellen benutze einfach 2x Enter um einen Neuen Block zu erstellen
-oder mit <code>pass</code> kann eine neue Zeile erstellt werden.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">Ich bin Bastian  pass:[&lt;/br&gt;]
-Und ich mache eine weiterbildung;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Ich bin Bastian </br>
-Und ich mache eine weiterbildung;</p>
+<h3 id="_ausgabearten">2.2. Ausgabearten</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>console.log('Hello World')</code> - Gibt Hello World in der Console aus</p>
+</li>
+<li>
+<p><code>console.info('Info')</code> - Gibt Info in der Console aus</p>
+</li>
+<li>
+<p><code>console.error('Error')</code> - Gibt Error in der Console aus</p>
+</li>
+<li>
+<p><code>console.warn('Warnung')</code> - Gibt Warnung in der Console aus</p>
+</li>
+<li>
+<p><code>console.clear()</code> - Löscht die Console</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_pass_verwenden">4.2. Pass Verwenden</h3>
+<h3 id="_count">2.3. Count</h3>
 <div class="paragraph">
-<p>Mit <code>pass</code> können wir Text so verwenden ohne das sie Formatiert werden</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">pass:[*Dies ist ein Text*]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>*Dies ist ein Text*</p>
-</div>
-<div class="paragraph">
-<p>Oder mit <code>pass</code> können wir auch HTML verwenden</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">pass:[&lt;span style="color:red;"&gt;Dies ist ein roter Text&lt;/span&gt;]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><span style="color:red;">Dies ist ein roter Text</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_farben">5. Farben</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Um Farben zu verwenden können wir das hier verwenden</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">[red]##Dies ist ein roter Text##
-[yellow]##Gelb##</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><span class="red">Dies ist ein roter Text</span>
-<span class="yellow">Gelb</span></p>
-</div>
-<div class="sect3">
-<h4 id="_farben_in_worten">5.1. Farben in Worten</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Farbe</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Beispiel</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Schwarz</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="black">Schwarz</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Weiß</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="white">Weiß</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Silber</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="silver">Silber</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="gray">Grau</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maroon</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="maroon">Maroon</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="red">Rot</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lila</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="purple">Lila</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fuchsia</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="fuchsia">Fuchsia</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grün</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="green">Grün</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Limette</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="lime">Limette</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Olive</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="olive">Olive</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gelb</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="yellow">Gelb</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Navy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="navy">Navy</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Blau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="blue">Blau</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Teal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="teal">Teal</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Aqua</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="aqua">Aqua</span></p></td>
-</tr>
-</tbody>
-</table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p><span class="red">Rot</span> <span class="blue">Blau</span></p>
-</div>
-<div class="paragraph">
-<p>In diesem Beispiel wird das Wort “Rot” in roter Farbe und das Wort “Blau” in blauer Farbe dargestellt. Beachten Sie, dass die doppelte Raute (##) es Ihnen ermöglicht, mehrere Formatierungen auf denselben Text anzuwenden, ohne dass zusätzliche Leerzeichen hinzugefügt werden. Ohne die doppelte Raute würde AsciiDoc dies als zwei separate Wörter interpretieren: ein rotes “Rot” und ein normales “Rot”. Mit der doppelten Raute wird das gesamte Wort in roter Farbe dargestellt, ohne zusätzliche Leerzeichen.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_farben_in_hex">5.2. Farben in Hex</h4>
-<div class="paragraph">
-<p>Um Hex Codes zu verwendne müssen wir dies wieder mit der <code>pass</code> Funktion machen.</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Farbe</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Hex-Code</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Schwarz</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#000000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Weiß</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FFFFFF</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Silber</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#C0C0C0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#808080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Maroon</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#800000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Rot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FF0000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lila</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#800080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fuchsia</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FF00FF</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grün</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#008000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Limette</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#00FF00</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Olive</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#808000</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gelb</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#FFFF00</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Navy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#000080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Blau</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#0000FF</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Teal</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#008080</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Aqua</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">#00FFFF</p></td>
-</tr>
-</tbody>
-</table>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii"> pass:[&lt;span style="color:#800080;&gt;Lila&lt;/span&gt;]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Beispiel: <span style="color:#800080;">Lila</span></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_linien_farbig_machen">5.3. Linien Farbig machen</h4>
-<div class="paragraph">
-<p><span style="border-bottom: 2px solid #800080;">Wort</span></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-ascii" data-lang="ascii">pass:[&lt;span style="border-bottom: 2px solid #800080;"&gt;Wort&lt;/span&gt;]</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_überschriften">6. Überschriften</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Die Überschriften werden mit einem = eingeleitet.
-je mehr = desto kleiner wird die Überschrift</p>
-</div>
-<div class="paragraph">
-<p>Mit 3x "<strong>-</strong>" Macht mein einen Unterschstrich dieser wird aber eh bei 2x= mitgemacht</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_checkboxen">7. Checkboxen</h2>
-<div class="sectionbody">
-<div class="ulist checklist">
-<ul class="checklist">
-<li>
-<p><i class="fa fa-check-square-o"></i> checked</p>
-</li>
-<li>
-<p><i class="fa fa-check-square-o"></i> also checked</p>
-</li>
-<li>
-<p><i class="fa fa-square-o"></i> not checked</p>
-</li>
-<li>
-<p>normal list item</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Um Checkboxen zu erstellen machst du das hier</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 100%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">* [*] checked</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">* [x] also checked</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">* [ ] not checked</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Eine einrückung kannst du mit "::" machen hinter einen wort</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">test</dt>
-<dd>
-<p>der Test</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tabellen_erstellen">8. Tabellen erstellen</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Tabellen in Asciidoc sind flexibel und können mit verschiedenen Optionen angepasst werden. Hier sind einige der Möglichkeiten:</p>
+<p>Mit der count Funktion kann gezählt werden wie oft ein bestimmter Befehl ausgeführt wurde.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>cols</code> definiert die Spaltenbreite und -ausrichtung.</p>
+<p><code>console.count('Count')</code> - Zählt wie oft der Befehl ausgeführt wurde</p>
 </li>
 <li>
-<p><code>frame</code> und <code>grid</code> steuern die Rahmen und Gitterlinien der Tabelle.</p>
-</li>
-<li>
-<p><code>stripes</code> fügt abwechselnde Hintergrundfarben zu den Zeilen hinzu.</p>
-</li>
-<li>
-<p><code>header</code> und <code>footer</code> ermöglichen es, Kopf- und Fußzeilen zu definieren.</p>
+<p><code>console.countReset('Count')</code> - Setzt den Zähler zurück</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>frame:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">all</th>
-<th class="tableblock halign-left valign-top">Zeichnet einen Rahmen um die gesamte Tabelle.</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">topbot</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet einen Rahmen um die ober und unterseite der Tabelle.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sides</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet einen Rahmen um die Seiten der Tabelle.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet keinen Rahmen um die Tabelle.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>grid:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">all</th>
-<th class="tableblock halign-left valign-top">Zeichnet ein Gitter um die gesamte Tabelle.</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">horiz</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter nur horizontal.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">vert</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter nur vertikal.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">rows</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter um jede Zeile.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">cols</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet ein Gitter um jede Spalte.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zeichnet kein Gitter.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>stripes:</p>
-</div>
-<table class="tableblock frame-all grid-all stripes-odd stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">odd</th>
-<th class="tableblock halign-left valign-top">Fügt eine Hintergrundfarbe zu den ungeraden Zeilen hinzu.</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">even</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fügt eine Hintergrundfarbe zu den geraden Zeilen hinzu.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">none</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fügt keine Hintergrundfarbe hinzu.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">hover</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fügt eine Hintergrundfarbe hinzu, wenn der Benutzer mit der Maus über die Zeile fährt. ( Nur in HTML)</p></td>
-</tr>
-</tbody>
-</table>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>|===
-|Column 1, Header Row |Column 2, Header Row :red
-|Column 1, Row 1, hi
-|Column 2, Row 1, hi
-|Column 1, Row 2, max
-|Column 2, Row 2, max
-|===</code></pre>
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">console.count('Count') // 1
+console.count('Count') // 2
+console.count('Count') // 3
+console.count('Count') // 4
+console.countReset('Count') // 0</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_debug">2.4. Debug</h3>
 <div class="paragraph">
-<p>Hier wird mit den "|===" das Ende und der Anfang definiert
-mit "|" wird eine neue Spalte erstellt</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_admonitions">9. Admonitions</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Es gibt bestimmte Aussagen, auf die Sie aufmerksam machen möchten, indem Sie sie aus dem Fluss des Inhalts herausnehmen und ihnen eine Priorität zuweisen. Man nennt sie Ermahnungen. Auf dieser Seite erfahren Sie, welche Hinweistypen AsciiDoc bereitstellt, wie Sie Ihrem Dokument Hinweise hinzufügen und wie Sie diese mithilfe von Symbolen oder Emojis verbessern.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Liste von Admonitions</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>NOTE</p>
-</li>
-<li>
-<p>TIP</p>
-</li>
-<li>
-<p>IMPORTANT</p>
-</li>
-<li>
-<p>CAUTION</p>
-</li>
-<li>
-<p>WARNING</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="img/Admonitions.png" alt="Admonitions">
-</div>
-</div>
-<div class="paragraph">
-<p>Um diese Icons nun zu verwenden muss <code>icons</code> eingeschaltet sein sonst steht nur der Text da.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:icosn: font
-
-[NOTE]
-====
-Das ist ein Notiz # oder eine andere aus der Liste
-====
-
-oder
-WARNING: text</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Bei den unteren wird es erst beendet wen eine leerzeile zwischen der Admonitions und den normalen Text</p>
-</div>
-<div class="paragraph">
-<p>Verwendung:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[NOTE]
-====
-Ein Beispiel für eine Notiz.
-====</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Ein Beispiel für eine Notiz.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_links_und_bilder">10. Links und Bilder</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Links und bilder werden mit einem <strong>link:</strong> eingeleitet und Bilder mit einen <strong>image:</strong></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Beispiel</dt>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">link:https://www.google.com[Klick mich]
-image:pfad[alternativer Text]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><a href="https://www.google.com">Klick mich</a></p>
-</div>
-<div class="paragraph">
-<p>Natürlich können Lokale dateien Auch Verlinks sein oder Bilder</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_listen_erstellen">11. Listen erstellen</h2>
-<div class="sectionbody">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">um eine Auflistung zu erstellen brauchen wir das </dt>
-<dd>
-<p>und ein * oder .</p>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">beispiel::
-* hi</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">beispiel</dt>
-<dd>
-<div class="ulist">
-<ul>
-<li>
-<p>hi</p>
-</li>
-</ul>
-</div>
-</dd>
-</dl>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">beispiel::
-. hi
-.. hi
-... hi</code></pre>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">beispiel</dt>
-<dd>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>hi</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>hi</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>hi</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_umrandungen">12. Umrandungen</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">====
-The book hit the floor with a *thud*.
-
-He could hear doves *cooing* in the pine trees`' branches.
-====</code></pre>
-</div>
-</div>
-<div class="exampleblock">
-<div class="title">Example 1. Onomatopoeia</div>
-<div class="content">
-<div class="paragraph">
-<p>The book hit the floor with a <strong>thud</strong>.</p>
-</div>
-<div class="paragraph">
-<p>He could hear doves <strong>cooing</strong> in the pine trees&#8217; branches.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_einklapbare_blöcke">13. Einklapbare Blöcke</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">[%collapsible]
-====
-*Hier steht Ihre Überschrift*
-
-Hier steht der Inhalt, der aufgeklappt wird.
-====</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Um einen Einklappbaren bereich zu erstellen</p>
-</div>
-<details>
-<summary class="title">Details</summary>
-<div class="content">
-<div class="paragraph">
-<p><strong>Hier steht Ihre Überschrift</strong></p>
-</div>
-<div class="paragraph">
-<p>Hier steht der Inhalt, der aufgeklappt wird.</p>
-</div>
-</div>
-</details>
-<div class="paragraph">
-<p>Um die Überschrift zu ändern kann dies mit Html Code selbst geschehen</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">++++
-&lt;details&gt;
-  &lt;summary&gt;Aufklappbar&lt;/summary&gt;
-  Hier steht der Inhalt, der aufgeklappt wird.
-&lt;/details&gt;
-++++</code></pre>
-</div>
-</div>
-<details>
-  <summary>Aufklappbar</summary>
-  Hier steht der Inhalt, der aufgeklappt wird.
-</details>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_code_block">14. Code Block</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-target" data-lang="target">[source, target]
-"----"
-
-Code Bla bla
-"----"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Hier im code Natürlich ohne die " "</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_verse_style">15. Verse Style</h2>
-<div class="sectionbody">
-<div class="verseblock">
-<pre class="content">The fog comes
-on little cat feet.</pre>
-<div class="attribution">
-&#8212; Carl Sandburg<br>
-<cite>two lines from the poem Fog</cite>
-</div>
-</div>
-<div class="paragraph">
-<p>Hier sehen wir das die normalen Zeilen geschreiben wreden und unten ein Verse noch eingefügt wird.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[verse,Carl Sandburg, two lines from the poem Fog]
-The fog comes
-on little cat feet.</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_open_blocks">16. Open Blocks</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>mit den <code>word</code> können wir "Öffnungsblöcke" erstellen.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[sidebar]
-.Related information
---
-This is aside text.
-
-It is used to present information related to the main content.
---</code></pre>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Related information</div>
-<div class="paragraph">
-<p>This is aside text.</p>
-</div>
-<div class="paragraph">
-<p>It is used to present information related to the main content.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_kommentare">17. Kommentare</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Kommentare sind abunzu sehr wichtig.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">* first text
-
-// Commentar das ist ein Test
-
-* second text</code></pre>
-</div>
+<p>Mit der debug Funktion kann ein Breakpoint gesetzt werden. Dieser wird gesetzt wenn die Console geöffnet ist.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>first text</p>
+<p><code>console.debug('Debug')</code> - Setzt einen Breakpoint</p>
 </li>
 </ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">console.debug('Debug')</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dir">2.5. Dir</h3>
+<div class="paragraph">
+<p>Mit der dir Funktion können Objekte in der Console ausgegeben werden.
+Der Vorteil hier ist das die Objekte aufgeklappt werden können und so die Struktur des Objektes besser sichtbar ist.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>second text</p>
+<p><code>console.dir(obj)</code> - Gibt das Objekt in der Console aus</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>oder in einen Code Block</p>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">[comment]
-Das ist ein kommentar</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>oder</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">////
-
-HIer kommen Kommentare
- ////</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_automatische_nummerierung">18. Automatische Nummerierung</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Um eine Automatische Nummerierung zu erstellen können wir <code>:sectnums: section</code> verwenden.</p>
-</div>
-<div class="paragraph">
-<p>Hier wird dann von oben nach unten die Nummerierung erstellt.</p>
-</div>
-<div class="paragraph">
-<p>Andere Übergabeparameter</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_source_code_highlighter">19. Source Code Highlighter</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Es gibt mehrere Highlighter die wir verwenden können.</p>
-</div>
-<div class="paragraph">
-<p><code>:source-highlighter:</code></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>coderay</p>
-</li>
-<li>
-<p>highlight.js</p>
-</li>
-<li>
-<p>pygments</p>
-</li>
-<li>
-<p>rouge</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In meinen Fall benutze ich <code>highlight.js</code> diese muss nur ganz oben in der Datei eingefügt werden.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:source-highlighter: highlight.js</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_pdf_einbinden">20. PDF einbinden</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Natürlich können wir hier auch pdfs einbinden mit</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_navigation_leiste">21. Navigation-Leiste</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Um eine Navigation-Leiste zu erstellen brauchen wir das hier</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:toc: left</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Um Links eine Navigations leiste zu erstellen diese Erekennt alle == und === und Verlinkt diese miteinander</p>
-</div>
-<div class="paragraph">
-<p>Standart Gemäs ist dies auf <code>:toclevels: 4</code> Heißt wir können an der Seite nur bis einen Unterpunkt machen wenn wir dies Erhöhen können wir 5 angeben dann können wir bis zu <code>=====</code> 5 machen und diese So unterkatogerisieren.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_eigene_style_css_einbinden">22. Eigene Style / CSS einbinden</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Hier mit können wir Klassen schon im Voraus erstellen und diese dann verwenden.
-Um den Style zu verbessern / zu Beeinflussen</p>
-</div>
-<div class="paragraph">
-<p>Schritt 1:</p>
-</div>
-<div class="paragraph">
-<p>Erstellen der <code>docinfo.html</code> Datei in der gleichen Ebene wie die Asciidoc Datei.</p>
-</div>
-<div class="paragraph">
-<p>Schritt 2:</p>
-</div>
-<div class="paragraph">
-<p>Dort dann die Klassen erstellen die wir verwenden wollen.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;style&gt;
-.small-text {
-    font-size: 0.8em;
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const obj = {
+    name: 'Max',
+    age: 25,
+    address: {
+        street: 'Musterstra',
+        number: 12
+    }
 }
-&lt;/style&gt;</code></pre>
+
+console.dir(obj)</code></pre>
 </div>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="img/dir.png" alt="dir">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gruppierung">2.6. Gruppierung</h3>
 <div class="paragraph">
-<p>Schritt 3:</p>
+<p>Mit der Gruppierung können mehrere Ausgaben in einer Gruppe zusammengefasst werden diese können dann zusammen und aufgeklappt angezeigt werden.</p>
 </div>
-<div class="paragraph">
-<p>In der Asciidoc Datei dann die <code>docinfo.html</code> einbinden.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>console.group('Gruppe')</code> - Öffnet eine Gruppe</p>
+</li>
+<li>
+<p><code>console.groupEnd()</code> - Schließt eine Gruppe</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">:docinfo: shared</code></pre>
+<pre>console.groupCollapsed('Gruppe') - Öffnet eine Gruppe und klappt sie sofort zusammen</pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_style_der_console">2.7. Style der Console</h3>
+<div class="paragraph">
+<p>Mit der Style Funktion können die Ausgaben in der Console gestylt werden.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>console.log('%cHello World', 'color: red; font-size: 20px')</code> - Gibt Hello World in der Console aus und stylt es</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Schritt 4:</p>
-</div>
-<div class="paragraph">
-<p><span class="small-text">Dies ist ein kleiner Text</span></p>
+<p>%c - Wird verwendet um den Style zu setzen das %c wird durch den Style ersetzt</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-adoc" data-lang="adoc">pass:[&lt;span class="small-text"&gt;Dies ist ein kleiner Text&lt;/span&gt;]</code></pre>
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">console.log('%cHello World', 'color: red; font-size: 20px')</code></pre>
 </div>
 </div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
+<div class="imageblock">
+<div class="content">
+<img src="img/Style.png" alt="Style">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_table">2.8. Table</h3>
 <div class="paragraph">
-<p>Um diese nun in der HMTL auch richtig zu sehen müssen  den umwandlungs Befehl  anpassen <code>asciidoctor --attribute docinfo=shared datei.adoc</code></p>
+<p>Mit der table Funktion können Arrays in einer Tabelle ausgegeben werden.</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>console.table(array)</code> - Gibt das Array in einer Tabelle aus</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const array = [
+    {name: 'Max', age: 25},
+    {name: 'Peter', age: 30},
+    {name: 'Hans', age: 35}
+]
+
+console.table(array)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_trace">2.9. Trace</h3>
+<div class="paragraph">
+<p>Der Trace Befehl gibt den Stacktrace aus. Hiermit kann nachvollzogen werden wie eine Funktion aufgerufen wurde. Und woher sie aufgerufen wurde.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>console.trace()</code> - Gibt den Stacktrace aus</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">function a() {
+    b()
+}
+
+function b() {
+    c()
+}
+
+function c() {
+    console.trace()
+}
+
+a()</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/trace.png" alt="trace">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_zeitmessung">2.10. Zeitmessung</h3>
+<div class="paragraph">
+<p>Mit der Zeitmessung können die Zeiten von Funktionen oder Schleifen gemessen werden.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>console.time('Zeit')</code> - Startet die Zeitmessung</p>
+</li>
+<li>
+<p><code>console.timeEnd('Zeit')</code> - Beendet die Zeitmessung</p>
+</li>
+<li>
+<p><code>console.timeLog('Zeit')</code> - Gibt die Zeit aus</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Umwandeln">23. Umwandeln in HTML oder PDF</h2>
+<h2 id="_debugging">3. Debugging</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_breakpoints_code">3.1. Breakpoints Code</h3>
+<div class="paragraph">
+<p>Mit Breakpoints können an bestimmten Stellen im Code Breakpoints gesetzt werden. Diese werden dann ausgeführt wenn die Console geöffnet ist.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>debugger</code> - Setzt einen Breakpoint mit Code</p>
+</li>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-code" data-lang="code">asciidoctor input.adoc</code></pre>
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">function a() {
+    debugger
+    console.log('Hello World')
+}
+
+a()</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_breakpoints_setzen">3.2. Breakpoints setzen</h3>
+<div class="paragraph">
+<p>An bestimmten Stellen im Code können Breakpoints gesetzt werden. Diese werden dann ausgeführt wenn die Console geöffnet ist.</p>
+</div>
+<div class="sect3">
+<h4 id="_source">3.2.1. Source</h4>
+<div class="paragraph">
+<p>In der Source können Breakpoints gesetzt werden. Dazu muss die DevTools geöffnet sein und dann auf <strong>Source</strong> geklickt werden. Dort kann dann der Code geöffnet werden und Breakpoints gesetzt werden.</p>
+</div>
+<div class="paragraph">
+<p>Einfach auf die Zeile klicken wo der Breakpoint gesetzt werden soll.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/Debugging/Breakpoint%20Source%20Setzten.png" alt="Breakpoint Source Setzten">
 </div>
 </div>
 <div class="paragraph">
-<p>Um eine Asciidoctor zu erstellen in Html zu erstellen</p>
+<p>Der Breakpoint kann nun auch nur bei bestimmten Bedingungen ausgeführt werden. Dazu einfach Rechtsklick auf den Breakpoint und dann <strong>Edit Breakpoint</strong> auswählen.</p>
+</div>
+<div class="paragraph">
+<p>Dort können dann bedinungen eingestellt werden wie:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Wenn eine Variable einen bestimmten Wert hat</p>
+</li>
+<li>
+<p>Wenn eine Funktion aufgerufen wird</p>
+</li>
+<li>
+<p>Wenn eine Exception geworfen wird</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-code" data-lang="code">asciidoctor-pdf beispiel.adoc</code></pre>
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">- count === 4
+- name === 'Max'
+- a()
+- throw new Error('Error')</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/Debugging/Breakpoint%20editing.png" alt="Breakpoint editing">
 </div>
 </div>
 <div class="paragraph">
-<p>Gerne hier weiteres Zum Nachlesen zu Befehlen in Asciidoc
-<a href="https://phlow.de/magazin/terminal/asciidoctor/">Klick Mich</a></p>
+<p>Diese werden dann in einer anderen Farbe angezeigt</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_watch">3.2.2. Watch</h4>
+<div class="paragraph">
+<p>In der Watch können Variablen überwacht werden. Dazu muss die DevTools geöffnet sein und dann auf <strong>Source</strong> klicken. Dort kann dann auf <strong>Watch</strong> geklickt werden und die Variablen eingetragen werden.</p>
+</div>
+<div class="paragraph">
+<p>Pause on caught  - Wenn eine Exception gefangen wird wird der Code angehalten
+Pause on uncaught exceptions - Wenn eine Exception nicht gefangen wird wird der Code angehalten</p>
+</div>
+<div class="paragraph">
+<p>fetch - Wenn Fetch aufgerufen wird wird der Code angehalten</p>
+</div>
+<div class="paragraph">
+<p>z.b Nur wenn main.py in den Fetch eingetragen wird wird der Code angehalten wenn Fetch aufgerufen wird.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/Debugging/fetch.png" alt="fetch">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_elements">3.2.3. Elements</h4>
+<div class="paragraph">
+<p>In den Elements können Breakpoints gesetzt werden. Dazu muss die DevTools geöffnet sein und dann auf <strong>Elements</strong> klicken. Dort kann dann auf <strong>Breakpoints</strong> geklickt werden und die Breakpoints eingetragen werden.</p>
+</div>
+<div class="paragraph">
+<p>Diese sind für DOM Elemente und können dann ausgeführt werden wenn das Element geändert wird.</p>
+</div>
+<div class="paragraph">
+<p>durch javascript</p>
+</div>
+<div class="paragraph">
+<p>z.b Wenn ein Element geändert wird wird der Code angehalten</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">document.querySelector('button').addEventListener('click', () =&gt; {
+    document.querySelector('h1').textContent = 'Hello World'
+})</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_run_befehl">4. Run Befehl</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit dem Run Befehl können Befehle in der Console ausgeführt werden.</p>
+</div>
+<div class="paragraph">
+<p>Strg + Shift + P drücken und dann Run eingeben. Hier können Befehle eingegeben werden die dann ausgeführt werden.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_snippets">5. Snippets</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit Snippets können Code Schnipsel gespeichert und ausgeführt werden. Diese werden in der DevTools gespeichert und können jederzeit ausgeführt werden. Um diese zu öffnen muss die DevTools geöffnet sein dann auf <strong>Source</strong> klicken und auf den kleinen 2 Pfeil klicken dort können die Snippets geöffnet werden.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/Anleitung%20Snippets.png" alt="Anleitung Snippets">
+</div>
+</div>
+<div class="paragraph">
+<p>Dort können dann die Snippets erstellt und ausgeführt werden. Diese sind dann auf jeder Seite verfügbar.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="img/Snippets.png" alt="Snippets">
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-18 21:06:06 +0100
+Last updated 2024-06-01 15:37:17 +0200
 </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
 </body>
 </html>

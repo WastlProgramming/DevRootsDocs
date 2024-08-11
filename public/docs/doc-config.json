@@ -1,0 +1,28 @@
+{
+    "docus": [
+        {
+            "name": "ascii",
+            "path": "ascii"
+        },
+        {
+            "git": "git",
+            "path": "git"
+        },
+        {
+            "name": "linux",
+            "path": "linux"
+        },
+        {
+            "name": "php",
+            "path": "php"
+        },
+        {
+            "name": "sphinx",
+            "path": "sphinx"
+        },
+        {
+            "name": "typescript",
+            "path": "typescript"
+        }
+    ]
+}

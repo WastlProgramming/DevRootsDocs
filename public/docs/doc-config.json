@@ -17,6 +17,10 @@
             "path": "git"
         },
         {
+            "name" :"java", 
+            "path": "java"
+        },
+        {
             "name": "linux",
             "path": "linux"
         },

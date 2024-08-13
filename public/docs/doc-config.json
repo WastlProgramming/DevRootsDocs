@@ -17,7 +17,7 @@
             "path": "git"
         },
         {
-            "name" :"java", 
+            "name": "java",
             "path": "java"
         },
         {
@@ -29,8 +29,16 @@
             "path": "php"
         },
         {
+            "name": "python",
+            "path": "python"
+        },
+        {
             "name": "sass",
             "path": "sass"
+        },
+        {
+            "javascript": "js",
+            "path": "js"
         },
         {
             "name": "sphinx",

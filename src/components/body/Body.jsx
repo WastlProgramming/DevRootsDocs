@@ -42,19 +42,22 @@ function Body() {
   }, []);
 
   return (
-    <div className='card-container'>
-      {docusInfo.map((docu, index) => (
-        <div key={index} className="card">
+  <div className='card-container'>
+    {docusInfo.map((docu, index) => (
+      <div key={index} className="card">
+        <div className="card-content">
           <h2>{docu.title}</h2>
           <p>{docu.description}</p>
           <p><strong>Version:</strong> {docu.version}</p>
           <p><strong>Author:</strong> {docu.author}</p>
           <p><strong>Last Update:</strong> {docu.lastUpdate}</p>
-          <a href={docu.file} target="_blank" rel="noopener noreferrer">Read Documentation</a>
         </div>
-      ))}
-    </div>
-  );
+        <a className='read_docu' href={docu.file} target="_blank" rel="noopener noreferrer">Read Documentation</a>
+      </div>
+    ))}
+  </div>
+);
+
 }
 
 export default Body;
